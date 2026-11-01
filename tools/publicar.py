@@ -11,6 +11,7 @@ llega la hora indicada en cada uno, los publica en el sitio:
      y en el JSON-LD
   3. agrega la card arriba de todo en articulos/index.html
   4. agrega al sitemap.xml las URLs que falten (/articulos/ y cada artículo)
+  5. pone el artículo en el botón "Último artículo" de links.html (bio de Instagram)
 
 Solo usa la librería estándar de Python 3.9+.
 
@@ -234,6 +235,33 @@ def sincronizar_sitemap(destino, ultima_fecha):
     ruta.write_text(xml, encoding="utf-8")
 
 
+def actualizar_links(destino, art):
+    """Pone el artículo recién publicado en el botón "Último artículo" de links.html
+    (la página de la bio de Instagram). Reemplaza lo que hay entre los comentarios
+    ULTIMO-ARTICULO:INICIO y ULTIMO-ARTICULO:FIN. Si la página o las marcas no
+    están, avisa y sigue: no es motivo para frenar la publicación."""
+    ruta = Path(destino) / "links.html"
+    if not ruta.exists():
+        print("Aviso: no existe links.html; no actualizo el último artículo.")
+        return False
+    pagina = ruta.read_text(encoding="utf-8")
+    marcas = re.compile(r"(<!-- ULTIMO-ARTICULO:INICIO -->\n).*?(\n[ \t]*<!-- ULTIMO-ARTICULO:FIN -->)", re.S)
+    if not marcas.search(pagina):
+        print("Aviso: links.html no tiene las marcas ULTIMO-ARTICULO; no actualizo el último artículo.")
+        return False
+    slug = art["slug"]
+    bloque = f'''    <a class="link link-article" href="articulos/{slug}.html">
+      <img class="link-thumb" src="img/articulos/{slug}.jpg" alt="" width="88" height="58" loading="lazy" onerror="this.style.visibility='hidden'">
+      <span>
+        <span class="link-label">Último artículo</span>
+        <span class="link-title">{art['titulo']}</span>
+      </span>
+      <svg class="link-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>
+    </a>'''
+    ruta.write_text(marcas.sub(lambda m: m.group(1) + bloque + m.group(2), pagina, count=1), encoding="utf-8")
+    return True
+
+
 def publicar_articulo(art, origen, destino):
     c = art["cuando"]
     slug = art["slug"]
@@ -315,6 +343,7 @@ def main():
     reales = [a for a in publicados if not a["prueba"]]
     if reales:
         sincronizar_sitemap(destino, reales[-1]["cuando"].strftime("%Y-%m-%d"))
+        actualizar_links(destino, reales[-1])  # el más nuevo va al botón de la bio
     salida_github(publicado="true", lista=", ".join(a["slug"] for a in publicados))
 
 

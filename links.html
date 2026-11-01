@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Página de links para la bio de Instagram. No se indexa: no compite con la home en Google. -->
+  <meta name="robots" content="noindex, follow">
+
+  <title>Links — CADH</title>
+  <meta name="description" content="Los links de la Comunidad Argentina de HEMA: comunidad de WhatsApp, último artículo, HEMAPA y sitio.">
+  <meta name="author" content="Comunidad Argentina de HEMA">
+
+  <link rel="icon" href="img/favicon.ico" sizes="any">
+  <link rel="icon" href="img/favicon-192.png" type="image/png" sizes="192x192">
+
+  <meta property="og:title" content="Comunidad Argentina de HEMA — Links">
+  <meta property="og:description" content="Sumate a la comunidad de WhatsApp, leé el último artículo y encontrá dónde practicar HEMA en Argentina.">
+  <meta property="og:image" content="https://www.cadh-hema.com.ar/img/og-image.jpg">
+  <meta property="og:url" content="https://www.cadh-hema.com.ar/links.html">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="es_AR">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --color-bg:            #0f0f13;
+      --color-text:          #e8e4f0;
+      --color-text-muted:    #9a94a8;
+      --color-text-footer:   #4e4a5a;
+      --color-accent:        #a07bff;
+      --color-accent-dark:   #7c5cbf;
+      --color-surface:       rgba(255, 255, 255, 0.03);
+      --color-border:        rgba(160, 120, 255, 0.12);
+      --color-border-accent: rgba(160, 120, 255, 0.30);
+      --font-display: 'Syne', sans-serif;
+      --font-body:    'DM Sans', sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+
+    html { -webkit-text-size-adjust: 100%; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: var(--color-bg);
+      color: var(--color-text);
+      font-family: var(--font-body);
+      font-size: 15px;
+      line-height: 1.65;
+      /* Un halo violeta muy sutil arriba, para que no sea un negro plano */
+      background-image: radial-gradient(ellipse 80% 45% at 50% -10%, rgba(160, 120, 255, 0.14), transparent 70%);
+      background-repeat: no-repeat;
+    }
+
+    .wrap {
+      max-width: 460px;
+      margin: 0 auto;
+      padding: 48px 16px 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    /* ---------- Encabezado ---------- */
+    .head { text-align: center; margin-bottom: 20px; }
+    .head-logo { width: 168px; height: auto; display: block; margin: 0 auto 20px; }
+    .head h1 {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 22px;
+      line-height: 1.2;
+      letter-spacing: -0.01em;
+      margin: 0 0 6px;
+    }
+    .head p { margin: 0; color: var(--color-text-muted); font-size: 14px; }
+
+    /* ---------- Botón destacado: comunidad de WhatsApp ---------- */
+    .link-main {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 20px 20px;
+      margin-bottom: 8px;
+      border-radius: 12px;
+      background: var(--color-accent);
+      color: #0f0f13;
+      text-decoration: none;
+      box-shadow: 0 0 0 1px rgba(160, 120, 255, 0.5), 0 10px 32px -8px rgba(160, 120, 255, 0.55);
+      transition: transform .15s ease, box-shadow .15s ease;
+    }
+    .link-main:hover { transform: translateY(-2px); box-shadow: 0 0 0 1px rgba(160, 120, 255, 0.7), 0 14px 40px -8px rgba(160, 120, 255, 0.7); }
+    .link-main:focus-visible { outline: 2px solid var(--color-text); outline-offset: 3px; }
+    .link-main-badge {
+      position: absolute;
+      top: -10px;
+      left: 18px;
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--color-accent);
+      background: var(--color-bg);
+      border: 1px solid var(--color-border-accent);
+      border-radius: 100px;
+      padding: 3px 10px;
+      line-height: 1.4;
+    }
+    .link-main-icon {
+      flex: 0 0 44px;
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      background: rgba(15, 15, 19, 0.14);
+      display: grid; place-items: center;
+    }
+    .link-main-icon svg { width: 24px; height: 24px; }
+    .link-main-title {
+      display: block;
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 18px;
+      line-height: 1.2;
+    }
+    .link-main-sub { display: block; font-size: 13px; line-height: 1.4; margin-top: 3px; opacity: 0.78; }
+    .link-main-arrow { margin-left: auto; flex: 0 0 auto; width: 18px; height: 18px; }
+
+    /* ---------- Botones secundarios ---------- */
+    .link {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 14px 16px;
+      border-radius: 10px;
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      color: var(--color-text);
+      text-decoration: none;
+      transition: border-color .15s ease, background .15s ease;
+    }
+    .link:hover { border-color: var(--color-border-accent); background: rgba(160, 120, 255, 0.06); }
+    .link:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 3px; }
+    .link-icon {
+      flex: 0 0 40px;
+      width: 40px; height: 40px;
+      border-radius: 8px;
+      border: 1px solid var(--color-border-accent);
+      color: var(--color-accent);
+      display: grid; place-items: center;
+    }
+    .link-icon svg { width: 20px; height: 20px; }
+    .link-label {
+      display: block;
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--color-accent);
+      line-height: 1.4;
+    }
+    .link-title { display: block; font-weight: 500; font-size: 15px; line-height: 1.35; }
+    .link-arrow { margin-left: auto; flex: 0 0 auto; width: 16px; height: 16px; color: var(--color-text-muted); }
+
+    /* Último artículo: con miniatura de la imagen destacada */
+    .link-article { padding: 10px 16px 10px 10px; }
+    .link-thumb {
+      flex: 0 0 88px;
+      width: 88px; height: 58px;
+      border-radius: 6px;
+      object-fit: cover;
+      background: rgba(160, 120, 255, 0.08);
+    }
+
+    /* ---------- Pie ---------- */
+    .foot { margin-top: 28px; text-align: center; }
+    .socials { display: flex; justify-content: center; gap: 10px; margin-bottom: 14px; }
+    .socials a {
+      width: 40px; height: 40px;
+      display: grid; place-items: center;
+      border-radius: 50%;
+      border: 1px solid var(--color-border);
+      color: var(--color-text-muted);
+      transition: color .15s ease, border-color .15s ease;
+    }
+    .socials a:hover { color: var(--color-accent); border-color: var(--color-border-accent); }
+    .socials svg { width: 18px; height: 18px; }
+    .foot p { margin: 0; font-size: 11px; color: var(--color-text-footer); }
+
+    @media (prefers-reduced-motion: reduce) {
+      .link-main, .link, .socials a { transition: none; }
+      .link-main:hover { transform: none; }
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+
+    <header class="head">
+      <img src="img/logo-cadh.svg" alt="CADH" class="head-logo" width="168" height="56">
+      <h1>Comunidad Argentina de HEMA</h1>
+      <p>Esgrima histórica en toda la Argentina</p>
+    </header>
+
+    <!-- 1. DESTACADO: comunidad de WhatsApp -->
+    <a class="link-main" href="https://chat.whatsapp.com/J8FOacdq1g0GMBEtuvFxuf" target="_blank" rel="noopener">
+      <span class="link-main-badge">Empezá por acá</span>
+      <span class="link-main-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.47 14.38c-.3-.15-1.75-.86-2.02-.96-.27-.1-.47-.15-.67.15-.2.3-.77.96-.94 1.16-.17.2-.35.22-.64.07-.3-.15-1.25-.46-2.38-1.47-.88-.79-1.47-1.76-1.65-2.06-.17-.3-.02-.46.13-.6.13-.14.3-.35.45-.52.15-.18.2-.3.3-.5.1-.2.05-.37-.03-.52-.07-.15-.67-1.61-.92-2.2-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48s1.06 2.88 1.21 3.08c.15.2 2.1 3.2 5.08 4.48.71.31 1.26.49 1.69.63.71.23 1.36.2 1.87.12.57-.09 1.75-.72 2-1.41.25-.69.25-1.29.17-1.41-.07-.12-.27-.2-.57-.35zM12.05 21.5h-.01a9.4 9.4 0 0 1-4.8-1.32l-.34-.2-3.57.94.95-3.48-.22-.36a9.43 9.43 0 0 1-1.45-5.03c0-5.2 4.24-9.44 9.45-9.44 2.52 0 4.89.99 6.67 2.77a9.38 9.38 0 0 1 2.76 6.68c0 5.21-4.24 9.44-9.44 9.44zm8.04-17.48A11.3 11.3 0 0 0 12.05.7C5.78.7.68 5.8.68 12.06c0 2 .52 3.96 1.52 5.68L.58 23.7l6.1-1.6a11.33 11.33 0 0 0 5.37 1.37h.01c6.26 0 11.36-5.1 11.36-11.36 0-3.04-1.18-5.89-3.33-8.04z"/></svg>
+      </span>
+      <span>
+        <span class="link-main-title">Sumate a la comunidad de WhatsApp</span>
+        <span class="link-main-sub">Eventos, torneos, clubes y charla con practicantes de todo el país</span>
+      </span>
+      <svg class="link-main-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </a>
+
+    <!-- 2. Último artículo.
+         Lo actualiza solo tools/publicar.py cada vez que sale un artículo programado.
+         No borrar los comentarios ULTIMO-ARTICULO: el script reemplaza lo que hay entre ellos. -->
+    <!-- ULTIMO-ARTICULO:INICIO -->
+    <a class="link link-article" href="articulos/tratados-de-hema.html">
+      <img class="link-thumb" src="img/articulos/tratados-de-hema.jpg" alt="" width="88" height="58" loading="lazy" onerror="this.style.visibility='hidden'">
+      <span>
+        <span class="link-label">Último artículo</span>
+        <span class="link-title">Los tratados de HEMA: cuáles son y dónde leerlos</span>
+      </span>
+      <svg class="link-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>
+    </a>
+    <!-- ULTIMO-ARTICULO:FIN -->
+
+    <!-- 3. HEMAPA -->
+    <a class="link" href="hemapa.html">
+      <span class="link-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>
+      </span>
+      <span>
+        <span class="link-label">HEMAPA</span>
+        <span class="link-title">Dónde practicar HEMA cerca tuyo</span>
+      </span>
+      <svg class="link-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>
+    </a>
+
+    <!-- 4. Sitio -->
+    <a class="link" href="index.html">
+      <span class="link-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg>
+      </span>
+      <span>
+        <span class="link-label">Sitio</span>
+        <span class="link-title">Conocé la CADH</span>
+      </span>
+      <svg class="link-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>
+    </a>
+
+    <footer class="foot">
+      <div class="socials">
+        <a href="https://www.instagram.com/cadh.hema" target="_blank" rel="noopener" aria-label="Instagram de la CADH">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.6" fill="currentColor"/></svg>
+        </a>
+        <a href="https://www.facebook.com/cadhhema" target="_blank" rel="noopener" aria-label="Facebook de la CADH">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 3h-2.5A3.5 3.5 0 0 0 9 6.5V10H6.5v3.5H9V21h3.5v-7.5H15l.5-3.5h-3V7a1 1 0 0 1 1-1H15z"/></svg>
+        </a>
+      </div>
+      <p>cadh-hema.com.ar</p>
+    </footer>
+
+  </main>
+</body>
+</html>
