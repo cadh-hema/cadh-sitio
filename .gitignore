@@ -1,0 +1,33 @@
+# Este repo es PÚBLICO: todo lo que se sube acá lo puede ver cualquiera.
+# Estas reglas evitan subir por error documentos internos, borradores o datos.
+
+# Documentos y notas (el único .md permitido es el README)
+*.md
+!README.md
+*.docx
+*.doc
+*.pdf
+*.txt
+*.odt
+!robots.txt
+
+# Planillas y datos
+*.csv
+*.xlsx
+*.xls
+*.json
+*.kml
+
+# Borradores, mockups y pruebas
+borrador*
+mockup*
+prueba*
+*-borrador.*
+*-mockup.*
+privado/
+interno/
+
+# Archivos del sistema
+.DS_Store
+Thumbs.db
+desktop.ini
