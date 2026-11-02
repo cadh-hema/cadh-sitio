@@ -1,0 +1,51 @@
+name: Estampar sitio
+
+# Cada vez que se sube un cambio al sitio, copia el navbar y el footer
+# (partials/nav.html y partials/footer.html) a todas las páginas y rearma
+# el índice de artículos con su paginación. Si no hay nada que cambiar,
+# no hace nada.
+#
+# Después de que corre, en GitHub Desktop aparece "Pull origin": apretalo
+# para traer a tu compu lo que cambió el robot antes de seguir editando.
+on:
+  push:
+    branches: [main]
+    paths:
+      - "**.html"
+      - "partials/**"
+      - "tools/estampar.py"
+      - "articulos/**"
+  workflow_dispatch:   # permite correrlo a mano desde la pestaña Actions
+
+permissions:
+  contents: write
+  pages: write
+
+concurrency:
+  group: estampar
+  cancel-in-progress: false
+
+jobs:
+  estampar:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Traer el sitio
+        uses: actions/checkout@v4
+
+      - name: Estampar navbar, footer e índice de artículos
+        run: python3 tools/estampar.py
+
+      - name: Guardar cambios y publicar el sitio
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if [ -z "$(git status --porcelain)" ]; then
+            echo "Nada para guardar."
+            exit 0
+          fi
+          git config user.name "CADH estampador"
+          git config user.email "actions@users.noreply.github.com"
+          git add -A
+          git commit -m "Estampar navbar, footer e índice de artículos"
+          git push || (git pull --rebase origin main && git push)
+          gh api -X POST "repos/${{ github.repository }}/pages/builds" || true

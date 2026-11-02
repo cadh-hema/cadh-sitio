@@ -463,14 +463,14 @@ img { display: block; max-width: 100%; }
 
 /* Último artículo destacado: la primera card del listado (la más nueva, que el
    publicador agrega arriba de todo) ocupa todo el ancho y se ve más grande. */
-.card-grid > .card:first-child {
+.card-grid:not(.sin-destacado) > .card:first-child {
   grid-column: 1 / -1;
   background: rgba(160, 123, 255, 0.07);
   border-color: var(--color-border-accent);
 }
-.card-grid > .card:first-child:hover { border-color: var(--color-accent); }
-.card-grid > .card:first-child .card-body { padding: 24px 20px 28px; }
-.card-grid > .card:first-child .card-body::before {
+.card-grid:not(.sin-destacado) > .card:first-child:hover { border-color: var(--color-accent); }
+.card-grid:not(.sin-destacado) > .card:first-child .card-body { padding: 24px 20px 28px; }
+.card-grid:not(.sin-destacado) > .card:first-child .card-body::before {
   content: "Último artículo";
   display: inline-block;
   margin-bottom: 14px;
@@ -483,14 +483,14 @@ img { display: block; max-width: 100%; }
   letter-spacing: 0.06em;
   text-transform: uppercase;
 }
-.card-grid > .card:first-child .card-body h2 {
+.card-grid:not(.sin-destacado) > .card:first-child .card-body h2 {
   font-size: clamp(24px, 3.2vw, 34px);
   line-height: 1.2;
   margin-bottom: 12px;
 }
-.card-grid > .card:first-child .card-body p { font-size: 16px; }
-.card-grid > .card:first-child .card-body .card-meta { font-size: 13px; }
-.card-grid > .card:first-child .card-body::after {
+.card-grid:not(.sin-destacado) > .card:first-child .card-body p { font-size: 16px; }
+.card-grid:not(.sin-destacado) > .card:first-child .card-body .card-meta { font-size: 13px; }
+.card-grid:not(.sin-destacado) > .card:first-child .card-body::after {
   content: "Leer artículo →";
   display: inline-block;
   margin-top: 16px;
@@ -498,22 +498,57 @@ img { display: block; max-width: 100%; }
   font-weight: 500;
 }
 @media (min-width: 760px) {
-  .card-grid > .card:first-child { flex-direction: row; align-items: stretch; }
-  .card-grid > .card:first-child .card-img {
+  .card-grid:not(.sin-destacado) > .card:first-child { flex-direction: row; align-items: stretch; }
+  .card-grid:not(.sin-destacado) > .card:first-child .card-img {
     flex: 0 0 56%;
     width: 56%;
     aspect-ratio: auto;
     height: auto;
     min-height: 300px;
   }
-  .card-grid > .card:first-child .card-body {
+  .card-grid:not(.sin-destacado) > .card:first-child .card-body {
     flex: 1;
     display: flex;
     flex-direction: column;
     justify-content: center;
     padding: 32px;
   }
-  .card-grid > .card:first-child .card-body::before { align-self: flex-start; }
+  .card-grid:not(.sin-destacado) > .card:first-child .card-body::before { align-self: flex-start; }
+}
+
+/* ---------- Paginación del índice (la arma tools/estampar.py) ---------- */
+.card-grid:has(+ .paginacion) { padding-bottom: 32px; }
+.paginacion {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 12px 20px;
+  padding-bottom: 64px;
+  font-size: 14px;
+}
+.paginacion-nums { display: flex; gap: 6px; }
+.paginacion-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 36px;
+  height: 36px;
+  padding: 0 8px;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  color: var(--color-text-muted);
+}
+.paginacion-num:hover { border-color: var(--color-border-accent); color: var(--color-text); text-decoration: none; }
+.paginacion-num.actual { background: var(--color-accent); border-color: var(--color-accent); color: var(--color-bg); font-weight: 500; }
+.paginacion-flecha { color: var(--color-accent); font-weight: 500; }
+.h1-pagina {
+  display: block;
+  margin-top: 8px;
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 400;
+  color: var(--color-text-muted);
 }
 
 /* ---------- Footer (igual al resto del sitio) ---------- */
