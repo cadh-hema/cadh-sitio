@@ -9,7 +9,9 @@ llega la hora indicada en cada uno, los publica en el sitio:
   1. copia el artículo a articulos/<slug>.html y la imagen a img/articulos/<slug>.jpg
   2. pone la fecha de publicación (la programada) en el texto, en los metadatos
      y en el JSON-LD
-  3. agrega la card arriba de todo en articulos/index.html
+  3. guarda la bajada del bloque CADH-PROGRAMADO como <meta name="cadh-bajada">
+     (el índice de artículos, la paginación, el navbar y el footer los arma
+     después tools/estampar.py, que corre en el mismo workflow)
   4. agrega al sitemap.xml las URLs que falten (/articulos/ y cada artículo)
   5. pone el artículo en el botón "Último artículo" de links.html (bio de Instagram)
 
@@ -176,31 +178,17 @@ def estampar_fecha(texto, c):
     return texto
 
 
-def tarjeta(art, c):
-    bajada = art["meta"].get("bajada") or art["descripcion"] or ""
-    bajada = html.escape(bajada, quote=False) if art["meta"].get("bajada") else bajada
-    slug = art["slug"]
-    return f'''      <a class="card" href="{slug}.html">
-        <img class="card-img" src="../img/articulos/{slug}.jpg" width="1200" height="630"
-             alt="{art['alt']}" loading="lazy"
-             onerror="this.style.visibility='hidden'">
-        <div class="card-body">
-          <p class="section-label">{art['etiqueta']}</p>
-          <h2>{art['titulo']}</h2>
-          <p>{bajada}</p>
-          <p class="card-meta">{art['autor']} · <time datetime="{c.strftime('%Y-%m-%d')}">{fecha_corta(c)}</time> · {art['lectura']} min</p>
-        </div>
-      </a>'''
-
-
-def agregar_tarjeta(destino, art, c):
-    ruta = Path(destino) / "articulos" / "index.html"
-    idx = ruta.read_text(encoding="utf-8")
-    m = re.search(r'<div class="card-grid">\n', idx)
+def estampar_bajada(texto, art):
+    """Guarda la bajada (la frase corta de la card) dentro del artículo, para que
+    tools/estampar.py la use al armar el índice."""
+    bajada = art["meta"].get("bajada")
+    if not bajada or 'name="cadh-bajada"' in texto:
+        return texto
+    m = re.search(r'^([ \t]*)<meta name="description"[^\n]*\n', texto, re.M)
     if not m:
-        raise SystemExit('articulos/index.html no tiene <div class="card-grid">: no puedo agregar la card')
-    idx = idx[:m.end()] + "\n" + tarjeta(art, c) + "\n" + idx[m.end():]
-    ruta.write_text(idx, encoding="utf-8")
+        return texto
+    linea = f'{m.group(1)}<meta name="cadh-bajada" content="{html.escape(bajada, quote=True)}">\n'
+    return texto[:m.end()] + linea + texto[m.end():]
 
 
 def _entrada_sitemap(url, fecha, freq, prioridad):
@@ -268,12 +256,13 @@ def publicar_articulo(art, origen, destino):
     destino = Path(destino)
     (destino / "articulos").mkdir(exist_ok=True)
     (destino / "img" / "articulos").mkdir(parents=True, exist_ok=True)
-    (destino / "articulos" / f"{slug}.html").write_text(estampar_fecha(art["texto"], c), encoding="utf-8")
+    texto = estampar_fecha(art["texto"], c)
+    if not art["prueba"]:
+        texto = estampar_bajada(texto, art)
+    (destino / "articulos" / f"{slug}.html").write_text(texto, encoding="utf-8")
     imagen = Path(origen) / "img" / f"{slug}.jpg"
     if imagen.exists():
         shutil.copyfile(imagen, destino / "img" / "articulos" / f"{slug}.jpg")
-    if not art["prueba"]:
-        agregar_tarjeta(destino, art, c)
 
 
 def salida_github(**pares):

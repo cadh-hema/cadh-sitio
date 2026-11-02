@@ -1,0 +1,54 @@
+<!--
+  NAVBAR DE TODO EL SITIO
+  ======================
+  Este es el ÚNICO lugar donde se edita el menú. Al hacer push, GitHub lo copia
+  solo a todas las páginas (tools/estampar.py). No hace falta tocar cada página.
+
+  - Escribí los links como si la página estuviera en la raíz del sitio
+    (ej: "hemapa.html", "articulos/index.html"). El script les agrega "../"
+    en las páginas que están dentro de carpetas.
+  - No pongas class="active": el script marca solo el link de la página actual.
+-->
+<header class="nav">
+  <div class="container">
+    <nav class="nav-inner">
+      <a href="index.html" class="nav-logo" aria-label="Comunidad Argentina de HEMA">
+        <img src="img/logo-cadh.svg" alt="CADH" class="nav-logo-img">
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="hemapa.html">HEMAPA</a></li>
+        <li><a href="recursos.html">Recursos</a></li>
+        <li><a href="convivencia.html">Convivencia</a></li>
+        <li><a href="articulos/index.html">Artículos</a></li>
+        <li><a href="sobre-cadh.html">Más sobre CADH</a></li>
+        <li class="nav-dropdown">
+          <button class="nav-dropdown-toggle" aria-haspopup="true" aria-expanded="false">
+            Eventos
+            <svg class="nav-dropdown-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="10" height="10" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
+          <ul class="nav-dropdown-menu">
+            <li><a href="campamento.html">Campamento CADH</a></li>
+            <li><a href="torneo-hojas-de-plata.html">Torneo Hojas de Plata</a></li>
+          </ul>
+        </li>
+        <li class="nav-cta"><a href="https://chat.whatsapp.com/J8FOacdq1g0GMBEtuvFxuf" target="_blank" rel="noopener">Sumate</a></li>
+      </ul>
+      <button class="nav-toggle" id="navToggle" aria-label="Abrir menú" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
+  </div>
+  <nav class="nav-mobile" id="navMobile" aria-label="Menú mobile">
+    <a href="index.html">Inicio</a>
+    <a href="hemapa.html">HEMAPA</a>
+    <a href="recursos.html">Recursos</a>
+    <a href="convivencia.html">Convivencia</a>
+    <a href="articulos/index.html">Artículos</a>
+    <a href="sobre-cadh.html">Más sobre CADH</a>
+    <span class="nav-mobile-label">Eventos</span>
+    <a href="campamento.html" class="nav-mobile-sub">Campamento CADH</a>
+    <a href="torneo-hojas-de-plata.html" class="nav-mobile-sub">Torneo Hojas de Plata</a>
+    <a href="https://chat.whatsapp.com/J8FOacdq1g0GMBEtuvFxuf" target="_blank" rel="noopener" class="mobile-cta">Sumate al WhatsApp →</a>
+  </nav>
+</header>

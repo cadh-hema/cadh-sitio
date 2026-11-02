@@ -55,6 +55,18 @@ python -m http.server 8000
 
 ---
 
+## Navbar, footer e índice de artículos (se arman solos)
+
+- **Navbar:** se edita solo en `partials/nav.html`. **Footer:** solo en `partials/footer.html`.
+- Al hacer push, el workflow **Estampar sitio** (`tools/estampar.py`) los copia a todas las páginas, corrige los links de las páginas que están en carpetas y marca el link de la página actual.
+- En cada página, lo que está entre `<!-- CADH:NAV -->` y `<!-- /CADH:NAV -->` (y lo mismo con `CADH:FOOTER`) se pisa en cada push: no editar ahí.
+- **Índice de artículos:** `articulos/index.html` y `articulos/pagina-2.html`, `pagina-3.html`… se arman solos con todos los artículos de la carpeta, del más nuevo al más viejo: el destacado + 8 por página. La frase corta de cada card sale de `<meta name="cadh-bajada">` del artículo (o de la meta description si no tiene).
+- Una página nueva solo necesita tener un `<header class="nav">` y un `<footer class="footer">` cualquiera: la primera vez que corre el estampador los reemplaza por los oficiales.
+- `links.html` tiene diseño propio y no lleva navbar ni footer.
+- Después de cada push, si el robot cambió algo, GitHub Desktop muestra **Pull origin**: apretalo antes de seguir editando.
+
+---
+
 ## Cómo editar el contenido
 
 ### Agregar recursos (`recursos.html`)
