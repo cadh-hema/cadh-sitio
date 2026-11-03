@@ -48,6 +48,12 @@ jobs:
           git config user.name "CADH publicador"
           git config user.email "actions@users.noreply.github.com"
           git add articulos img sitemap.xml *.html
+          # Si no quedó nada para subir (p. ej. una página que el .gitignore bloquea),
+          # terminar sin error en vez de fallar y mandar un mail.
+          if git diff --cached --quiet; then
+            echo "No hay cambios para subir."
+            exit 0
+          fi
           git commit -m "Publicar artículo programado: ${{ steps.pub.outputs.lista }}"
           git push || (git pull --rebase origin main && git push)
           # Pide a GitHub Pages que reconstruya el sitio ya mismo
