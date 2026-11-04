@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!--
+    PÁGINA DE ERROR 404
+    GitHub Pages la muestra sola cuando alguien entra a una dirección que no existe.
+    El <base href="/"> hace que los links y las imágenes funcionen aunque la
+    dirección equivocada esté dentro de una carpeta (ej: /articulos/algo-mal).
+  -->
+  <base href="/">
+  <title>Página no encontrada — Comunidad Argentina de HEMA</title>
+  <meta name="description" content="La página que buscás no existe o cambió de lugar.">
+  <meta name="robots" content="noindex, follow">
+
+  <link rel="icon" href="img/favicon.ico" sizes="any">
+  <link rel="icon" href="img/favicon-192.png" type="image/png" sizes="192x192">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --color-bg:            #0f0f13;
+      --color-text:          #e8e4f0;
+      --color-text-muted:    #9a94a8;
+      --color-text-footer:   #4e4a5a;
+      --color-accent:        #a07bff;
+      --color-accent-dark:   #7c5cbf;
+      --color-surface:       rgba(255, 255, 255, 0.03);
+      --color-border:        rgba(160, 120, 255, 0.12);
+      --color-border-accent: rgba(160, 120, 255, 0.30);
+      --font-display:        'Syne', sans-serif;
+      --font-body:           'DM Sans', sans-serif;
+      --max-width: 1100px;
+      --pad-x:     28px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--color-bg);
+      color: var(--color-text);
+      font-size: 15px;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .container {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 var(--pad-x);
+    }
+
+    .section-label {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--color-accent);
+      margin-bottom: 12px;
+    }
+
+    /* ── BOTONES ── */
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--color-accent);
+      color: #0f0f13;
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: 13px;
+      letter-spacing: 0.02em;
+      padding: 11px 22px;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.1s;
+    }
+    .btn-primary:hover  { background: #b892ff; }
+    .btn-primary:active { transform: scale(0.98); }
+
+    /* ── NAVEGACIÓN ── */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(15, 15, 19, 0.95);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 96px;
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      flex-shrink: 0;
+      text-decoration: none;
+    }
+    .nav-logo-img {
+      height: 80px;
+      width: auto;
+      display: block;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 12px;
+      font-weight: 400;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--color-text-muted);
+      transition: color 0.2s;
+    }
+    .nav-links a:hover  { color: var(--color-text); }
+    .nav-links a.active { color: var(--color-accent); }
+    .nav-links .nav-cta a {
+      color: var(--color-accent);
+      border: 1px solid var(--color-border-accent);
+      border-radius: 6px;
+      padding: 5px 12px;
+    }
+    .nav-links .nav-cta a:hover { background: rgba(160,120,255,0.08); }
+
+    /* ── DROPDOWN "EVENTOS" ── */
+    .nav-dropdown { position: relative; }
+    .nav-dropdown-toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-family: var(--font-body);
+      font-size: 12px;
+      font-weight: 400;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--color-text-muted);
+      background: none;
+      border: none;
+      padding: 0;
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+    .nav-dropdown-toggle:hover,
+    .nav-dropdown:hover .nav-dropdown-toggle,
+    .nav-dropdown:focus-within .nav-dropdown-toggle { color: var(--color-text); }
+    .nav-dropdown-toggle.active { color: var(--color-accent); }
+    .nav-dropdown-arrow { transition: transform 0.2s; flex-shrink: 0; }
+    .nav-dropdown:hover .nav-dropdown-arrow,
+    .nav-dropdown:focus-within .nav-dropdown-arrow { transform: rotate(180deg); }
+    .nav-dropdown::after {
+      content: '';
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      height: 14px;
+    }
+    .nav-dropdown-menu {
+      list-style: none;
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      margin-top: 14px;
+      background: rgba(15, 15, 19, 0.98);
+      border: 1px solid var(--color-border);
+      border-radius: 10px;
+      padding: 8px;
+      min-width: 210px;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateX(-50%) translateY(-6px);
+      transition: opacity 0.2s, transform 0.2s, visibility 0.2s;
+      box-shadow: 0 12px 32px rgba(0,0,0,0.4);
+    }
+    .nav-dropdown:hover .nav-dropdown-menu,
+    .nav-dropdown:focus-within .nav-dropdown-menu {
+      opacity: 1;
+      visibility: visible;
+      transform: translateX(-50%) translateY(0);
+    }
+    .nav-dropdown-menu a {
+      display: block;
+      padding: 9px 12px;
+      border-radius: 6px;
+      font-size: 12.5px;
+      font-weight: 400;
+      text-transform: none;
+      letter-spacing: 0.01em;
+      color: var(--color-text-muted);
+      white-space: nowrap;
+      transition: color 0.2s, background 0.2s;
+    }
+    .nav-dropdown-menu a:hover { background: rgba(160,120,255,0.08); color: var(--color-text); }
+    .nav-dropdown-menu a.active { color: var(--color-accent); }
+
+    .nav-mobile-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--color-accent);
+      padding: 14px 0 4px;
+    }
+    .nav-mobile a.nav-mobile-sub { padding-left: 14px; font-size: 13px; }
+
+    .nav-toggle {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      width: 36px;
+      height: 36px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+    }
+    .nav-toggle span {
+      display: block;
+      height: 1.5px;
+      background: var(--color-text);
+      border-radius: 2px;
+      transition: transform 0.3s, opacity 0.3s;
+    }
+    .nav-toggle.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+    .nav-toggle.open span:nth-child(2) { opacity: 0; }
+    .nav-toggle.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+    .nav-mobile {
+      display: none;
+      flex-direction: column;
+      border-top: 1px solid var(--color-border);
+      padding: 16px var(--pad-x) 20px;
+      gap: 4px;
+    }
+    .nav-mobile.open { display: flex; }
+    .nav-mobile a {
+      font-size: 14px;
+      color: var(--color-text-muted);
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      transition: color 0.2s;
+    }
+    .nav-mobile a:hover  { color: var(--color-text); }
+    .nav-mobile a.active { color: var(--color-accent); }
+    .nav-mobile a.mobile-cta {
+      color: var(--color-accent);
+      font-weight: 500;
+      border-bottom: none;
+      margin-top: 8px;
+    }
+
+    /* ── FOOTER ── */
+    .footer {
+      padding: 32px 0;
+      border-top: 1px solid var(--color-border);
+    }
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .footer-brand {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 13px;
+      color: var(--color-text-footer);
+    }
+    .footer-brand span { color: var(--color-accent); opacity: 0.6; }
+    .footer-meta {
+      font-size: 11px;
+      color: var(--color-text-footer);
+      line-height: 1.6;
+      text-align: right;
+    }
+    .footer-meta a { color: var(--color-text-footer); transition: color 0.2s; }
+    .footer-meta a:hover { color: var(--color-text-muted); }
+
+
+    /* ── ERROR ── */
+    body { min-height: 100vh; display: flex; flex-direction: column; }
+    main { flex: 1; display: flex; align-items: center; }
+    .error {
+      position: relative;
+      width: 100%;
+      padding: 72px 0 96px;
+      overflow: hidden;
+    }
+    .error-code {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: clamp(110px, 22vw, 240px);
+      line-height: 0.9;
+      letter-spacing: -0.04em;
+      color: transparent;
+      -webkit-text-stroke: 1.5px var(--color-border-accent);
+      user-select: none;
+      margin-bottom: 8px;
+    }
+    .error-code span { color: var(--color-accent); -webkit-text-stroke: 0; }
+    .error h1 {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: clamp(26px, 4vw, 40px);
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      color: #fff;
+      max-width: 620px;
+      margin-bottom: 16px;
+    }
+    .error h1 em { font-style: normal; color: var(--color-accent); }
+    .error p {
+      font-size: 16px;
+      font-weight: 300;
+      color: var(--color-text-muted);
+      max-width: 540px;
+      line-height: 1.7;
+      margin-bottom: 12px;
+    }
+    .error-ruta {
+      display: inline-block;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 13px;
+      color: var(--color-text);
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: 6px;
+      padding: 3px 8px;
+      word-break: break-all;
+    }
+    .error-acciones { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--color-accent);
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      padding: 10px 20px;
+      border-radius: 8px;
+      border: 1px solid var(--color-border-accent);
+      transition: background 0.2s;
+    }
+    .btn-secondary:hover { background: rgba(160,120,255,0.08); }
+    .error-espadas {
+      position: absolute;
+      right: -40px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 420px;
+      max-width: 55vw;
+      opacity: 0.07;
+      pointer-events: none;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      :root { --pad-x: 16px; }
+      .nav-links  { display: none; }
+      .nav-toggle { display: flex; }
+      .footer-inner { flex-direction: column; align-items: flex-start; }
+      .footer-meta  { text-align: left; }
+      .error { padding: 48px 0 64px; }
+      .error-espadas { display: none; }
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- CADH:NAV · se genera solo desde partials/nav.html: no editar acá -->
+  <header class="nav">
+    <div class="container">
+      <nav class="nav-inner">
+        <a href="index.html" class="nav-logo" aria-label="Comunidad Argentina de HEMA">
+          <img src="img/logo-cadh.svg" alt="CADH" class="nav-logo-img">
+        </a>
+        <ul class="nav-links">
+          <li><a href="index.html">Inicio</a></li>
+          <li><a href="hemapa.html">HEMAPA</a></li>
+          <li><a href="recursos.html">Recursos</a></li>
+          <li><a href="convivencia.html">Convivencia</a></li>
+          <li><a href="articulos/index.html">Artículos</a></li>
+          <li><a href="sobre-cadh.html">Más sobre CADH</a></li>
+          <li class="nav-dropdown">
+            <button class="nav-dropdown-toggle" aria-haspopup="true" aria-expanded="false">
+              Eventos
+              <svg class="nav-dropdown-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="10" height="10" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+            </button>
+            <ul class="nav-dropdown-menu">
+              <li><a href="campamento.html">Campamento CADH</a></li>
+              <li><a href="torneo-hojas-de-plata.html">Torneo Hojas de Plata</a></li>
+            </ul>
+          </li>
+          <li class="nav-cta"><a href="https://chat.whatsapp.com/J8FOacdq1g0GMBEtuvFxuf" target="_blank" rel="noopener">Sumate</a></li>
+        </ul>
+        <button class="nav-toggle" id="navToggle" aria-label="Abrir menú" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </nav>
+    </div>
+    <nav class="nav-mobile" id="navMobile" aria-label="Menú mobile">
+      <a href="index.html">Inicio</a>
+      <a href="hemapa.html">HEMAPA</a>
+      <a href="recursos.html">Recursos</a>
+      <a href="convivencia.html">Convivencia</a>
+      <a href="articulos/index.html">Artículos</a>
+      <a href="sobre-cadh.html">Más sobre CADH</a>
+      <span class="nav-mobile-label">Eventos</span>
+      <a href="campamento.html" class="nav-mobile-sub">Campamento CADH</a>
+      <a href="torneo-hojas-de-plata.html" class="nav-mobile-sub">Torneo Hojas de Plata</a>
+      <a href="https://chat.whatsapp.com/J8FOacdq1g0GMBEtuvFxuf" target="_blank" rel="noopener" class="mobile-cta">Sumate al WhatsApp →</a>
+    </nav>
+  </header>
+  <!-- /CADH:NAV -->
+
+  <main>
+    <section class="error">
+      <svg class="error-espadas" viewBox="0 0 200 200" fill="none" stroke="#a07bff" stroke-width="3" stroke-linecap="round" aria-hidden="true">
+        <path d="M30 170 L150 50"/><path d="M150 50 L172 28 L170 40 Z" fill="#a07bff"/><path d="M48 132 L68 152"/><path d="M30 170 L22 178"/>
+        <path d="M170 170 L50 50"/><path d="M50 50 L28 28 L40 30 Z" fill="#a07bff"/><path d="M152 132 L132 152"/><path d="M170 170 L178 178"/>
+      </svg>
+      <div class="container">
+        <div class="error-code" aria-hidden="true">4<span>0</span>4</div>
+        <div class="section-label">Error 404 · Página no encontrada</div>
+        <h1>Estocada al <em>vacío</em>.</h1>
+        <p>La página que buscás no existe, cambió de lugar o la dirección tiene algún carácter de más (o de menos).</p>
+        <p id="rutaPedida" hidden>Dirección pedida: <span class="error-ruta" id="ruta"></span></p>
+        <div class="error-acciones">
+          <a href="index.html" class="btn-primary">Volver al inicio →</a>
+          <a href="articulos/index.html" class="btn-secondary">Ver artículos</a>
+          <a href="hemapa.html" class="btn-secondary">HEMAPA</a>
+          <a href="recursos.html" class="btn-secondary">Recursos</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- CADH:FOOTER · se genera solo desde partials/footer.html: no editar acá -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-brand">Comunidad Argentina de <span>HEMA</span> · CADH</div>
+        <div class="footer-meta">
+          <a href="mailto:comunidadargentinadehema@gmail.com">comunidadargentinadehema@gmail.com</a><br>
+          Un proyecto colaborativo · Argentina · 2024
+        </div>
+      </div>
+    </div>
+  </footer>
+  <!-- /CADH:FOOTER -->
+
+  <script>
+    // Menú hamburger
+    const toggle = document.getElementById('navToggle');
+    const mobile = document.getElementById('navMobile');
+    toggle.addEventListener('click', () => {
+      const open = mobile.classList.toggle('open');
+      toggle.classList.toggle('open', open);
+      toggle.setAttribute('aria-expanded', open);
+    });
+
+    // Muestra la dirección que no se encontró
+    try {
+      const ruta = decodeURIComponent(location.pathname + location.search);
+      if (ruta && ruta !== '/' && ruta !== '/404.html') {
+        document.getElementById('ruta').textContent = ruta;
+        document.getElementById('rutaPedida').hidden = false;
+      }
+    } catch (e) {}
+  </script>
+
+</body>
+</html>
