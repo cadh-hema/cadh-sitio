@@ -27,7 +27,7 @@ jobs:
       - name: Traer los artículos programados (repo privado, solo lectura)
         uses: actions/checkout@v4
         with:
-          repository: comunidadargentinadehema/cadh-programados
+          repository: cadh-hema/cadh-programados
           token: ${{ secrets.PROGRAMADOS_TOKEN }}
           path: _programados
           persist-credentials: false
