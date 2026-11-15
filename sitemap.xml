@@ -52,7 +52,7 @@
 
   <url>
     <loc>https://www.cadh-hema.com.ar/articulos/</loc>
-    <lastmod>2026-11-01</lastmod>
+    <lastmod>2026-11-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -74,6 +74,13 @@
   <url>
     <loc>https://www.cadh-hema.com.ar/articulos/guia-para-empezar-en-hema-en-argentina.html</loc>
     <lastmod>2026-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://www.cadh-hema.com.ar/articulos/armas-y-estilos-de-hema.html</loc>
+    <lastmod>2026-11-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
